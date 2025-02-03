@@ -18,10 +18,29 @@ struct person
     string reshte;
     vector<lesson> lessons;
     float average;
+    float getavg(){
+        if (lessons.empty()){
+
+            average = 0;
+            return 0;
+        }
+            
+        float avg = 0;
+        int vahedcount = 0;
+        for (auto& li:lessons){
+            avg +=li.grade;
+            vahedcount += li.vahed;
+        }
+        avg = avg/vahedcount;
+        average = avg;
+        return avg;
+    }
 };
 
 
-inline bool compare (const person& a,const person& b){return a.average < b.average;}
+inline bool compare (const person& a, const person& b){
+    return a.average < b.average;
+}
 
 vector<person> personsdata;
 
@@ -106,6 +125,8 @@ void updateLesson(lesson& course,unsigned long int id){
 }
 
 void calcaverage(person& p){
+    if (p.lessons.empty())
+        p.average=0;
     float avg = 0;
     for (auto& li:p.lessons){
         avg += li.grade;

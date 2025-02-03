@@ -87,7 +87,7 @@ void newlesson(person& p){
     cout << endl;
     payload->student_id = p.id;
     addLesson(*payload,p.id);
-    calcaverage(p);
+    p.getavg();
 }
 
 void editlesson(string name,unsigned long int id){
@@ -112,7 +112,7 @@ void students (vector<person>& p)
     sort(p.begin(),p.end(),compare);
     for (int i = 0; i < p.size(); i++)
     {
-        cout << p[i].name << "\t|" << p[i].id << "\t|" << p[i].reshte << "\t|" << p[i].average << endl;
+        cout << p[i].name << "\t|" << p[i].id << "\t|" << p[i].reshte << "\t|" << p[i].getavg() << endl;
     }
     unsigned long int inpid;
     cout << "-------------------------------------------------------" << endl;
@@ -162,13 +162,11 @@ void createstudent() {
     cout << "enter reshte :" ;
     cin >> payload->reshte;
     cout << endl;
-    cout << "enter average :" ;
-    cin >> payload->average;
-    cout << endl;
     last++;
     payload->id = last;
     auto list = new vector<lesson>;
     payload->lessons = *list;
+    payload->getavg();
     addStudent(*payload);
 }
 
