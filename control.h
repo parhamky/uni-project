@@ -10,8 +10,10 @@ void newlesson(person& p);
 
 void editstudent (person& p){
     person* payload = new person;
+
     cout << "enter new name :" ;
     cin >> payload->name;
+
     cout << endl;
     cout << "enter new reshte :" ;
     cin >> payload->reshte;
@@ -23,12 +25,19 @@ void editstudent (person& p){
     updateStudent(*payload,p.id);
 }
 
+void deletestudent(person& p)
+{
+    removeStudent(p.id);
+    delete(&p);
+}
+
 void student (person& p){
     cout << "welcome" <<p.name << endl;
     cout << "0-exit" << endl;
     cout << "1-lessons list" << endl;
     cout << "2-edit students" << endl;
     cout << "3-if you want to add lesson to student" << endl;
+    cout << "4-delete student" <<endl;
     short int key;
     cin >> key;
     switch (key){
@@ -41,24 +50,48 @@ void student (person& p){
     case 3:
         newlesson(p);
         break;
+    case 4:
+        deletestudent(p);
     case 0:
         return;
+        break;
     }
+
 }
 
 void newlesson(person& p){
     lesson* payload = new lesson;
     cout << "enter course name:";
     cin >> payload->lesson_name;
+    if (payload->lesson_id == NULL)
+    {
+        cout << "id is empty";
+        return;
+    }
     cout << endl;
     cout << "enter course grade:";
     cin >> payload->lesson_name;
+    if (payload->lesson_id == NULL)
+    {
+        cout << "lesson is empty";
+        return;
+    }
     cout << endl;
     cout << "enter course vahed:";
     cin >> payload->lesson_name;
+    if (payload->lesson_id == NULL)
+    {
+        cout << "name is empty";
+        return;
+    }
     cout << endl;
     cout << "enter student id:";
     cin >> payload->lesson_name;
+    if (payload->lesson_id == NULL)
+    {
+        cout << "name is empty";
+        return;
+    }
     cout << endl;
     calcaverage(p);
     addLesson(*payload,p.id);
@@ -69,28 +102,33 @@ void editlesson(string name,unsigned long int id){
     payload->lesson_name = name;
     cout << endl;
     cout << "enter course grade:";
-    cin >> payload->lesson_name;
+    cin >> payload->grade;
     cout << endl;
     cout << "enter course vahed:";
-    cin >> payload->lesson_name;
+    cin >> payload->vahed;
     cout << endl;
     cout << "enter student id:";
-    cin >> payload->lesson_name;
+    cin >> payload->student_id;
     cout << endl;
     updateLesson(*payload,id);
 }
 
 void students (vector<person>& p)
 {
-    cout << "name" << "\t|" << "id" << "\t|" << "average" << endl;
+    cout << "name" << "\t|" << "id" << "\t|"<< "reshte" << "\t|" << "average" << endl;
     sort(p.begin(),p.end(),compare);
     for (int i = 0; i < p.size(); i++)
     {
-        cout << p[i].name << "\t|" << p[i].id << "\t|" << p[i].average << endl;
+        cout << p[i].name << "\t|" << p[i].id << "\t|" << p[i].reshte << "\t|" << p[i].average << endl;
     }
     unsigned long int inpid;
     cout << "-------------------------------------------------------" << endl;
     cout << "enter the id of student" << endl;
+    cout <<"0 for exit" << endl;
+    if (inpid == 0)
+    {
+        return;
+    }
     cin  >> inpid;
     for (int i = 0; i < p.size(); i++){
         if(p[i].id == inpid){
@@ -102,9 +140,10 @@ void students (vector<person>& p)
 
 void lessons (person& p)
 {
+
     auto list = p.lessons;
     cout << "id"<< "\t|" << "name" << "\t|" << "vahed" << "\t|" << "grade" << endl;
-    for (auto li:list){
+    for (auto& li:list){
 
         cout << li.lesson_id << "\t|"<< li.lesson_name << "\t|" << li.vahed << "\t|" << li.grade << endl;
 
@@ -114,7 +153,7 @@ void lessons (person& p)
     unsigned long int inpid;
     cin >> inpid;
 
-    for (auto li:list){
+    for (auto& li:list){
         if (li.lesson_id == inpid){
             editlesson(li.lesson_name,p.id);
         }

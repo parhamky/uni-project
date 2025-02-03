@@ -47,9 +47,9 @@ void updateStudent(person& payload,unsigned long int id){
         if (li.id == id){
             if (payload.average != NULL)
                 li.average = payload.average;
-            if (payload.average != NULL)
+            if (!payload.name.empty())
                 li.name = payload.name;
-            if (payload.average != NULL)
+            if (!payload.reshte.empty())
                 li.reshte = payload.reshte;
         }
     }
@@ -66,34 +66,35 @@ void addLesson(lesson& payload,unsigned long int id){
 }
 
 void removeLesson(lesson& course,unsigned long int id){
-    for (auto li:personsdata){
+    for (auto& li:personsdata){
         if (li.id == id){
             for (unsigned long int i = 0; i < li.lessons.size();i++){
-                auto c = li.lessons[i];
+                auto& c = li.lessons[i];
                 if (c.student_id == id && id == course.student_id && c.lesson_name == course.lesson_name){
                        li.lessons.erase(li.lessons.begin() + i); 
                 }
             }
         }
     }
+    delete(&course);
     cout << "student not found" << endl;
 }
 
 
 void updateLesson(lesson& course,unsigned long int id){
-    for (auto li:personsdata){
+    for (auto& li:personsdata){
         if (li.id == id){
-            for (auto c:li.lessons){
+            for (auto& c:li.lessons){
                 if (c.student_id == id && id == course.student_id && c.lesson_name == course.lesson_name){
                     if (course.grade != NULL)
                     c.grade = course.grade;
-                    if (course.grade != NULL)
+                    if (course.lesson_id != NULL)
                     c.lesson_id = course.lesson_id;
-                    if (course.grade != NULL)
+                    if (!course.lesson_name.empty())
                     c.lesson_name = course.lesson_name;
-                    if (course.grade != NULL)
+                    if (course.student_id != NULL)
                     c.student_id = course.student_id;
-                    if (course.grade != NULL)
+                    if (course.vahed != NULL)
                     c.vahed = course.vahed;
                 }
             }    
