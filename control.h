@@ -4,10 +4,44 @@
 #include "algorithm"
 using namespace std;
 
+void editstudent (person& p){
+    person* payload = new person;
+    cout << "enter new name :" ;
+    cin >> payload->name;
+    cout << endl;
+    cout << "enter new reshte :" ;
+    cin >> payload->reshte;
+    cout << endl;
+    cout << "enter new average :" ;
+    cin >> payload->average;
+    cout << endl;
+    payload->id = p.id;
+    updateStudent(*payload,p.id);
+}
+
+void newlesson(person& p){
+    lesson* payload = new lesson;
+    cout << "enter course name:";
+    cin >> payload->lesson_name;
+    cout << endl;
+    cout << "enter course grade:";
+    cin >> payload->lesson_name;
+    cout << endl;
+    cout << "enter course vahed:";
+    cin >> payload->lesson_name;
+    cout << endl;
+    cout << "enter student id:";
+    cin >> payload->lesson_name;
+    cout << endl;
+    
+    addLesson(*payload,p.id);
+}
+
 void student (person& p){
     cout << "welcome" <<p.name << endl;
     cout << "1-lessons list" << endl;
     cout << "2-edit students" << endl;
+    cout << "3-if you want to add lesson to student" << endl;
     short int key;
     cin >> key;
     switch (key){
@@ -15,8 +49,11 @@ void student (person& p){
             lessons(p);
             break;
         case 2:
-
+            editstudent(p);            
            break; 
+        case 3:
+            newlesson(p);
+            break;
     }
 }
 
@@ -43,10 +80,10 @@ void students (vector<person>& p)
 void lessons (person& p)
 {
     auto list = p.lessons;
-    cout << "id" << "name" << "\t|" << "vahed" << "\t|" << "grade" << endl;
+    cout << "id"<< "\t|" << "name" << "\t|" << "vahed" << "\t|" << "grade" << endl;
     for (auto li:list){
            
-        cout << li.lesson_name << "\t|" << li.vahed << "\t|" << li.grade << endl;
+        cout << li.lesson_id << "\t|"<< li.lesson_name << "\t|" << li.vahed << "\t|" << li.grade << endl;
 
     }
     cout << "-------------------------------------------------------------------------" << endl;
@@ -56,14 +93,43 @@ void lessons (person& p)
     
     for (auto li:list){
         if (li.lesson_id == inpid){
-            editlesson(li);
+            editlesson(p.id);
         }
     }
     cout << "lesson not found" << endl;
 }
 
-void editlesson(lesson& l){
+void editlesson(unsigned long int id){
+    lesson* payload = new lesson;
+    cout << "enter course name:";
+    cin >> payload->lesson_name;
+    cout << endl;
+    cout << "enter course grade:";
+    cin >> payload->lesson_name;
+    cout << endl;
+    cout << "enter course vahed:";
+    cin >> payload->lesson_name;
+    cout << endl;
+    cout << "enter student id:";
+    cin >> payload->lesson_name;
+    cout << endl;
+    updateLesson(*payload,id);
+}
 
+void createstudent() {
+    person* payload = new person;
+    cout << "enter name :" ;
+    cin >> payload->name;
+    cout << endl;
+    cout << "enter reshte :" ;
+    cin >> payload->reshte;
+    cout << endl;
+    cout << "enter average :" ;
+    cin >> payload->average;
+    cout << endl;
+    last++;
+    payload->id = last;
+    addStudent(*payload);
 }
 
 void index (vector<person>& p)
@@ -73,7 +139,7 @@ void index (vector<person>& p)
     cout << "-----------------------------------" << endl;
     cout << "select and option" << endl;
     cout << "1-Show students" << endl;
-    cout << "2-Show lessons" << endl;
+    cout << "2-create student" << endl;
     cin >> key;
     if (key > 2 || key < 1)
         cout << "invalid input";
@@ -85,8 +151,10 @@ void index (vector<person>& p)
         students(p);
         break;
     case 2:
-        students(p);
+        createstudent();
         break;
     }
+    
+
 }
 
