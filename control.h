@@ -7,11 +7,16 @@ using namespace std;
 void student (person& p){
     cout << "welcome" <<p.name << endl;
     cout << "1-lessons list" << endl;
+    cout << "2-edit students" << endl;
     short int key;
     cin >> key;
     switch (key){
         case 1:
             lessons(p);
+            break;
+        case 2:
+
+           break; 
     }
 }
 
@@ -24,6 +29,7 @@ void students (vector<person>& p)
         cout << p[i].name << "\t|" << p[i].id << "\t|" << p[i].average << endl;
     }
     unsigned long int inpid;
+    cout << "-------------------------------------------------------" << endl;
     cout << "enter the id of student" << endl;
     cin  >> inpid;
     for (int i = 0; i < p.size(); i++){
@@ -36,10 +42,20 @@ void students (vector<person>& p)
 void lessons (person& p)
 {
     auto list = p.lessons;
+    cout << "id" << "name" << "\t|" << "vahed" << "\t|" << "grade" << endl;
     for (auto li:list){
-        
+           
         cout << li.lesson_name << "\t|" << li.vahed << "\t|" << li.grade << endl;
 
+    }
+    cout << "-------------------------------------------------------------------------" << endl;
+    cout << "if you want to edit lesson type lesson id or 0 to exit" << endl; 
+    unsigned long int inpid;
+    cin >> inpid;
+    for (auto li:list){
+        if (li.lesson_id == inpid){
+            
+        }
     }
 }
 
