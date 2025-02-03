@@ -1,20 +1,28 @@
 #include <iostream>
 #include "models.h"
 #include "vector"
+#include "algorithm"
 using namespace std;
 
 void student (person& p){
-
+    cout << "welcome" <<p.name << endl;
+    cout << "1-lessons list" << endl;
+    short int key;
+    cin >> key;
+    switch (key){
+        case 1:
+            lessons(p);
+    }
 }
 
 void students (vector<person>& p)
 {
     cout << "name" << "\t|" << "id" << "\t|" << "average" << endl;
-    
-   for (int i = 0; i < p.size(); i++)
-   {
-       cout << p[i].name << "\t|" << p[i].id << "\t|" << p[i].average << endl;
-   }
+    sort(p.begin(),p.end(),compare);
+    for (int i = 0; i < p.size(); i++)
+    {
+        cout << p[i].name << "\t|" << p[i].id << "\t|" << p[i].average << endl;
+    }
     unsigned long int inpid;
     cout << "enter the id of student" << endl;
     cin  >> inpid;
@@ -25,9 +33,14 @@ void students (vector<person>& p)
     }
 }
 
-void lessons (vector<person>& p)
+void lessons (person& p)
 {
+    auto list = p.lessons;
+    for (auto li:list){
+        
+        cout << li.lesson_name << "\t|" << li.vahed << "\t|" << li.grade << endl;
 
+    }
 }
 
 void index (vector<person>& p)
