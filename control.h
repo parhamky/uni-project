@@ -63,38 +63,31 @@ void newlesson(person& p){
     lesson* payload = new lesson;
     cout << "enter course name:";
     cin >> payload->lesson_name;
-    if (payload->lesson_id == NULL)
+    if (payload->lesson_name.empty())
     {
         cout << "id is empty";
         return;
     }
     cout << endl;
     cout << "enter course grade:";
-    cin >> payload->lesson_name;
-    if (payload->lesson_id == NULL)
+    cin >> payload->grade;
+    if (payload->grade == NULL)
     {
         cout << "lesson is empty";
         return;
     }
     cout << endl;
     cout << "enter course vahed:";
-    cin >> payload->lesson_name;
-    if (payload->lesson_id == NULL)
+    cin >> payload->vahed;
+    if (payload->vahed == NULL)
     {
         cout << "name is empty";
         return;
     }
     cout << endl;
-    cout << "enter student id:";
-    cin >> payload->lesson_name;
-    if (payload->lesson_id == NULL)
-    {
-        cout << "name is empty";
-        return;
-    }
-    cout << endl;
-    calcaverage(p);
+    payload->student_id = p.id;
     addLesson(*payload,p.id);
+    calcaverage(p);
 }
 
 void editlesson(string name,unsigned long int id){
@@ -161,12 +154,6 @@ void lessons (person& p)
     cout << "lesson not found" << endl;
 }
 
-
-
-
-
-
-
 void createstudent() {
     person* payload = new person;
     cout << "enter name :" ;
@@ -180,6 +167,8 @@ void createstudent() {
     cout << endl;
     last++;
     payload->id = last;
+    auto list = new vector<lesson>;
+    payload->lessons = *list;
     addStudent(*payload);
 }
 
