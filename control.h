@@ -25,6 +25,7 @@ void editstudent (person& p){
 
 void student (person& p){
     cout << "welcome" <<p.name << endl;
+    cout << "0-exit" << endl;
     cout << "1-lessons list" << endl;
     cout << "2-edit students" << endl;
     cout << "3-if you want to add lesson to student" << endl;
@@ -40,6 +41,8 @@ void student (person& p){
     case 3:
         newlesson(p);
         break;
+    case 0:
+        return;
     }
 }
 
@@ -57,7 +60,7 @@ void newlesson(person& p){
     cout << "enter student id:";
     cin >> payload->lesson_name;
     cout << endl;
-    
+    calcaverage(p);
     addLesson(*payload,p.id);
 }
 

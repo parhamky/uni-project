@@ -101,3 +101,11 @@ void updateLesson(lesson& course,unsigned long int id){
     }
     cout << "student not found" << endl;
 }
+
+void calcaverage(person& p){
+    float avg = 0;
+    for (auto li:p.lessons){
+        avg += li.grade;
+    }
+    p.average = avg / p.lessons.size();
+}
