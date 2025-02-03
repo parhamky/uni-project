@@ -1,6 +1,7 @@
 #include "string"
-
+#include "vector"
 using namespace std;
+static unsigned int last_id = 0;
 struct lesson
 {
     unsigned int lesson_id;
@@ -15,7 +16,7 @@ struct person
     string name;
     unsigned int id;
     string reshte;
-    lesson lessons[];
+    vector<lesson> lessons;
     float average;
 };
 
