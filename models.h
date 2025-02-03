@@ -21,3 +21,5 @@ struct person
 };
 
 
+inline bool compare (const person& a,const person& b){return a.average < b.average;}
+
