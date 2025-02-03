@@ -4,6 +4,10 @@
 #include "algorithm"
 using namespace std;
 
+
+void lessons (person& p);
+void newlesson(person& p);
+
 void editstudent (person& p){
     person* payload = new person;
     cout << "enter new name :" ;
@@ -17,6 +21,26 @@ void editstudent (person& p){
     cout << endl;
     payload->id = p.id;
     updateStudent(*payload,p.id);
+}
+
+void student (person& p){
+    cout << "welcome" <<p.name << endl;
+    cout << "1-lessons list" << endl;
+    cout << "2-edit students" << endl;
+    cout << "3-if you want to add lesson to student" << endl;
+    short int key;
+    cin >> key;
+    switch (key){
+    case 1:
+        lessons(p);
+        break;
+    case 2:
+        editstudent(p);
+        break;
+    case 3:
+        newlesson(p);
+        break;
+    }
 }
 
 void newlesson(person& p){
@@ -37,24 +61,20 @@ void newlesson(person& p){
     addLesson(*payload,p.id);
 }
 
-void student (person& p){
-    cout << "welcome" <<p.name << endl;
-    cout << "1-lessons list" << endl;
-    cout << "2-edit students" << endl;
-    cout << "3-if you want to add lesson to student" << endl;
-    short int key;
-    cin >> key;
-    switch (key){
-        case 1:
-            lessons(p);
-            break;
-        case 2:
-            editstudent(p);            
-           break; 
-        case 3:
-            newlesson(p);
-            break;
-    }
+void editlesson(string name,unsigned long int id){
+    lesson* payload = new lesson;
+    payload->lesson_name = name;
+    cout << endl;
+    cout << "enter course grade:";
+    cin >> payload->lesson_name;
+    cout << endl;
+    cout << "enter course vahed:";
+    cin >> payload->lesson_name;
+    cout << endl;
+    cout << "enter student id:";
+    cin >> payload->lesson_name;
+    cout << endl;
+    updateLesson(*payload,id);
 }
 
 void students (vector<person>& p)
@@ -82,39 +102,28 @@ void lessons (person& p)
     auto list = p.lessons;
     cout << "id"<< "\t|" << "name" << "\t|" << "vahed" << "\t|" << "grade" << endl;
     for (auto li:list){
-           
+
         cout << li.lesson_id << "\t|"<< li.lesson_name << "\t|" << li.vahed << "\t|" << li.grade << endl;
 
     }
     cout << "-------------------------------------------------------------------------" << endl;
-    cout << "if you want to edit lesson type lesson id or 0 to exit" << endl; 
+    cout << "if you want to edit lesson type lesson id or 0 to exit" << endl;
     unsigned long int inpid;
     cin >> inpid;
-    
+
     for (auto li:list){
         if (li.lesson_id == inpid){
-            editlesson(p.id);
+            editlesson(li.lesson_name,p.id);
         }
     }
     cout << "lesson not found" << endl;
 }
 
-void editlesson(unsigned long int id){
-    lesson* payload = new lesson;
-    cout << "enter course name:";
-    cin >> payload->lesson_name;
-    cout << endl;
-    cout << "enter course grade:";
-    cin >> payload->lesson_name;
-    cout << endl;
-    cout << "enter course vahed:";
-    cin >> payload->lesson_name;
-    cout << endl;
-    cout << "enter student id:";
-    cin >> payload->lesson_name;
-    cout << endl;
-    updateLesson(*payload,id);
-}
+
+
+
+
+
 
 void createstudent() {
     person* payload = new person;
@@ -132,29 +141,35 @@ void createstudent() {
     addStudent(*payload);
 }
 
-void index (vector<person>& p)
+void index ()
 {
+    auto p = personsdata;
     short int key;
     cout << "Welcome to Student Managment App" << endl;
     cout << "-----------------------------------" << endl;
     cout << "select and option" << endl;
     cout << "1-Show students" << endl;
     cout << "2-create student" << endl;
+    cout <<  "3-exit" << endl;
     cin >> key;
-    if (key > 2 || key < 1)
-        cout << "invalid input";
-        index(p);
-
+    cout << "you choosed:" << key << endl;
+    if (key > 3 || key < 1)
+    {
+        cout << "invalid input" << endl;
+        index();
+    }
     switch (key)
     {
     case 1:
         students(p);
+        index();
         break;
     case 2:
         createstudent();
+        index();
         break;
+    case 3:
+        return;
     }
-    
-
 }
 
