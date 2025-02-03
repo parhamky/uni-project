@@ -37,6 +37,7 @@ void students (vector<person>& p)
             student(p[i]);
         }
     }
+    cout << "student not found " << endl;
 }
 
 void lessons (person& p)
@@ -52,11 +53,17 @@ void lessons (person& p)
     cout << "if you want to edit lesson type lesson id or 0 to exit" << endl; 
     unsigned long int inpid;
     cin >> inpid;
+    
     for (auto li:list){
         if (li.lesson_id == inpid){
-            
+            editlesson(li);
         }
     }
+    cout << "lesson not found" << endl;
+}
+
+void editlesson(lesson& l){
+
 }
 
 void index (vector<person>& p)
