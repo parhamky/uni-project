@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/parhamky/CLionProjects/untitled2/build",
+  "command": "/usr/bin/clang++-14 -g -std=gnu++17 -o CMakeFiles/untitled2.dir/main.cpp.o -c /home/parhamky/CLionProjects/untitled2/main.cpp",
+  "file": "/home/parhamky/CLionProjects/untitled2/main.cpp",
+  "output": "CMakeFiles/untitled2.dir/main.cpp.o"
+}
+]
