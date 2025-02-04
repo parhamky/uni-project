@@ -28,7 +28,7 @@ struct person
         float avg = 0;
         int vahedcount = 0;
         for (auto& li:lessons){
-            avg +=li.grade;
+            avg += (li.vahed * li.grade);
             vahedcount += li.vahed;
         }
         avg = avg/vahedcount;
@@ -38,13 +38,14 @@ struct person
 };
 
 
-inline bool compare (const person& a, const person& b){
-    return a.average < b.average;
+inline bool compare (person& a,person& b){
+    return a.getavg() > b.getavg();
 }
 
 vector<person> personsdata;
 
 static unsigned long int last = 0;
+static unsigned long int last_lesson = 0;
 
 void addStudent(person& p){
     personsdata.push_back(p);
@@ -55,6 +56,7 @@ void removeStudent(unsigned long int payload){
         auto li = personsdata[i];
         if (li.id == payload){
             personsdata.erase(personsdata.begin() + i);
+            return;
         }
     }
     cout << "student not found" << endl;
@@ -70,6 +72,7 @@ void updateStudent(person& payload,unsigned long int id){
                 li.name = payload.name;
             if (!payload.reshte.empty())
                 li.reshte = payload.reshte;
+            return;
         }
     }
     cout << "student not found" << endl;
@@ -128,8 +131,10 @@ void calcaverage(person& p){
     if (p.lessons.empty())
         p.average=0;
     float avg = 0;
+    float vaheds = 0;
     for (auto& li:p.lessons){
         avg += li.grade;
+        vaheds += li.vahed;
     }
-    p.average = avg / p.lessons.size();
+    p.average = avg / vaheds;
 }

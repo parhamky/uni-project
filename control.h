@@ -11,8 +11,9 @@ void newlesson(person& p);
 void editstudent (person& p){
     person* payload = new person;
 
+    cin.ignore();
     cout << "enter new name :" ;
-    cin >> payload->name;
+    getline(cin,payload->name);
 
     cout << endl;
     cout << "enter new reshte :" ;
@@ -32,11 +33,11 @@ void deletestudent(person& p)
 }
 
 void student (person& p){
-    cout << "welcome" <<p.name << endl;
+    cout << "welcome " <<p.name << endl;
     cout << "0-exit" << endl;
     cout << "1-lessons list" << endl;
     cout << "2-edit students" << endl;
-    cout << "3-if you want to add lesson to student" << endl;
+    cout << "3-add lesson" << endl;
     cout << "4-delete student" <<endl;
     short int key;
     cin >> key;
@@ -61,8 +62,9 @@ void student (person& p){
 
 void newlesson(person& p){
     lesson* payload = new lesson;
+    cin.ignore();
     cout << "enter course name:";
-    cin >> payload->lesson_name;
+    getline(cin,payload->lesson_name);
     if (payload->lesson_name.empty())
     {
         cout << "id is empty";
@@ -86,13 +88,17 @@ void newlesson(person& p){
     }
     cout << endl;
     payload->student_id = p.id;
+    last_lesson++;
+    payload->lesson_id = last_lesson;
     addLesson(*payload,p.id);
     p.getavg();
 }
 
 void editlesson(string name,unsigned long int id){
     lesson* payload = new lesson;
-    payload->lesson_name = name;
+    cin.ignore();
+    cout << "enter new course name:";
+    getline(cin,payload->lesson_name);
     cout << endl;
     cout << "enter course grade:";
     cin >> payload->grade;
@@ -156,8 +162,9 @@ void lessons (person& p)
 
 void createstudent() {
     person* payload = new person;
+    cin.ignore();
     cout << "enter name :" ;
-    cin >> payload->name;
+    getline(cin,payload->name);
     cout << endl;
     cout << "enter reshte :" ;
     cin >> payload->reshte;
