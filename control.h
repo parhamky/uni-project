@@ -116,12 +116,22 @@ void editlesson(string name,unsigned long int id){
 
 void students (vector<person>& p)
 {
+    cout << "--------------------------------------------------" << endl;
+    string reshteinp;
+    cin.ignore();
+    cout << "choose reshte: "; 
+    getline(cin,reshteinp);
+    vector<person> temp;
+    for (auto& li:p){
+        if (li.reshte == reshteinp)
+            temp.push_back(li);
+    }
     cout << left << setw(15) << "name" << setw(10) << "id" << setw(15)<< "reshte" << right << setw(10) << "average" << endl;
     cout << "--------------------------------------------------" << endl;
-    sort(p.begin(),p.end(),compare);
-    for (int i = 0; i < p.size(); i++)
+    sort(temp.begin(),temp.end(),compare);
+    for (int i = 0; i < temp.size(); i++)
     {
-        auto& li =  p[i];
+        auto& li =  temp[i];
         cout << left << setw(15) << li.name << setw(10) << li.id << setw(15)<< li.reshte << right << setw(7) << li.average << endl;
 
     }
@@ -133,10 +143,14 @@ void students (vector<person>& p)
     {
         return;
     }
-    cin  >> inpid;
-    for (int i = 0; i < p.size(); i++){
-        if(p[i].id == inpid){
-            student(p[i]);
+    while (!(cin >> inpid)) {  // Check if input fails
+        cout << "Invalid input! Please enter an integer: ";
+        cin.clear();  // Clear the error flag
+        cin.ignore(1000, '\n');  // Ignore invalid input
+    }
+    for (int i = 0; i < temp.size(); i++){
+        if(temp[i].id == inpid){
+            student(temp[i]);
             return;
         }
     }
@@ -157,7 +171,11 @@ void lessons (person& p)
     cout << "---------------------------------------------" << endl;
     cout << "if you want to edit lesson type lesson id or 0 to exit" << endl;
     unsigned long int inpid;
-    cin >> inpid;
+    while (!(cin >> inpid)) {  // Check if input fails
+        cout << "Invalid input! Please enter an integer: ";
+        cin.clear();  // Clear the error flag
+        cin.ignore(1000, '\n');  // Ignore invalid input
+    }
 
     for (auto& li:list){
         if (li.lesson_id == inpid){
@@ -188,14 +206,19 @@ void createstudent() {
 void index ()
 {
     auto p = personsdata;
-    short int key;
+    int key;
     cout << "Welcome to Student Managment App" << endl;
     cout << "-----------------------------------" << endl;
     cout << "select and option" << endl;
     cout << "1-Show students" << endl;
     cout << "2-create student" << endl;
     cout <<  "3-exit" << endl;
-    cin >> key;
+    while (!(cin >> key)) {  // Check if input fails
+        cout << "Invalid input! Please enter an integer: ";
+        cin.clear();  // Clear the error flag
+        cin.ignore(1000, '\n');  // Ignore invalid input
+    }
+    
     if (key > 3 || key < 1)
     {
         cout << "invalid input" << endl;
