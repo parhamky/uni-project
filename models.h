@@ -64,7 +64,7 @@ void removeStudent(unsigned long int payload){
 
 void updateStudent(person& payload,unsigned long int id){
     
-    for (auto li:personsdata){
+    for (auto& li:personsdata){
         if (li.id == id){
             if (payload.average != NULL)
                 li.average = payload.average;
@@ -108,6 +108,7 @@ void removeLesson(lesson& course,unsigned long int id){
 void updateLesson(lesson& course,unsigned long int id){
     for (auto& li:personsdata){
         if (li.id == id){
+            unsigned long int i = 0;
             for (auto& c:li.lessons){
                 if (c.student_id == id && id == course.student_id && c.lesson_name == course.lesson_name){
                     if (course.grade != NULL)
@@ -120,9 +121,16 @@ void updateLesson(lesson& course,unsigned long int id){
                     c.student_id = course.student_id;
                     if (course.vahed != NULL)
                     c.vahed = course.vahed;
+
+
+                    return;
                 }
+                i++;
+                if (i >= li.lessons.size())
+                    cout << "lesson not found" << endl;
             }    
         }
+
     }
     cout << "student not found" << endl;
 }

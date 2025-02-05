@@ -1,6 +1,7 @@
 #include <iostream>
 #include "models.h"
 #include "vector"
+#include <iomanip>
 #include "algorithm"
 using namespace std;
 
@@ -114,14 +115,17 @@ void editlesson(string name,unsigned long int id){
 
 void students (vector<person>& p)
 {
-    cout << "name" << "\t|" << "id" << "\t|"<< "reshte" << "\t|" << "average" << endl;
+    cout << left << setw(15) << "name" << setw(10) << "id" << setw(15)<< "reshte" << right << setw(10) << "average" << endl;
+    cout << "-------------------------------------------------------------------------------------------------------------------------------" << endl;
     sort(p.begin(),p.end(),compare);
     for (int i = 0; i < p.size(); i++)
     {
-        cout << p[i].name << "\t|" << p[i].id << "\t|" << p[i].reshte << "\t|" << p[i].getavg() << endl;
+        auto& li =  p[i];
+        cout << left << setw(15) << li.name << setw(10) << li.id << setw(15)<< li.reshte << right << setw(7) << li.average << endl;
+
     }
     unsigned long int inpid;
-    cout << "-------------------------------------------------------" << endl;
+    cout << "-------------------------------------------------------------------------------------------------------------------------------" << endl;
     cout << "enter the id of student" << endl;
     cout <<"0 for exit" << endl;
     if (inpid == 0)
@@ -140,14 +144,15 @@ void students (vector<person>& p)
 void lessons (person& p)
 {
 
-    auto list = p.lessons;
-    cout << "id"<< "\t|" << "name" << "\t|" << "vahed" << "\t|" << "grade" << endl;
+    auto& list = p.lessons;
+    cout << left << setw(10) << "id" << setw(15) << "name" << setw(7)<< right << "vahed" << right << setw(7) << "grade" << endl;
+    cout << "-----------------------------------------------------------------------------------------------------------------------------------------" << endl;
     for (auto& li:list){
 
-        cout << li.lesson_id << "\t|"<< li.lesson_name << "\t|" << li.vahed << "\t|" << li.grade << endl;
+        cout << left << setw(10) << li.lesson_id << setw(15) << li.lesson_name << setw(7)<< right << li.vahed << right << setw(7) << li.grade << endl;
 
     }
-    cout << "-------------------------------------------------------------------------" << endl;
+    cout << "------------------------------------------------------------------------------------------------------------------------------------------" << endl;
     cout << "if you want to edit lesson type lesson id or 0 to exit" << endl;
     unsigned long int inpid;
     cin >> inpid;
