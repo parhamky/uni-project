@@ -35,6 +35,7 @@ void deletestudent(person& p)
 
 void student (person& p){
     cout << "welcome " <<p.name << endl;
+    cout << "---------------------------------------------" << "endl";
     cout << "0-exit" << endl;
     cout << "1-lessons list" << endl;
     cout << "2-edit students" << endl;
@@ -136,6 +137,7 @@ void students (vector<person>& p)
     for (int i = 0; i < p.size(); i++){
         if(p[i].id == inpid){
             student(p[i]);
+            return;
         }
     }
     cout << "student not found " << endl;
@@ -149,7 +151,7 @@ void lessons (person& p)
     cout << "---------------------------------------------" << endl;
     for (auto& li:list){
 
-        cout << left << setw(10) << li.lesson_id << setw(15) << li.lesson_name << setw(7)<< right << li.vahed << right << setw(7) << li.grade << endl;
+        cout << left << setw(10) << li.lesson_id << setw(15) << li.lesson_name << setw(7)<< left << li.vahed << left << setw(7) << li.grade << endl;
 
     }
     cout << "---------------------------------------------" << endl;
@@ -160,6 +162,7 @@ void lessons (person& p)
     for (auto& li:list){
         if (li.lesson_id == inpid){
             editlesson(li.lesson_name,p.id);
+            return;
         }
     }
     cout << "lesson not found" << endl;
