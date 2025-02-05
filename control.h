@@ -196,7 +196,6 @@ void index ()
     cout << "2-create student" << endl;
     cout <<  "3-exit" << endl;
     cin >> key;
-    cout << "you choosed:" << key << endl;
     if (key > 3 || key < 1)
     {
         cout << "invalid input" << endl;
